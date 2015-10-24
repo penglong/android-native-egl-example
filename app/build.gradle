@@ -1,0 +1,33 @@
+apply plugin: 'com.android.model.application'
+
+model {
+    android {
+        compileSdkVersion = 21
+        buildToolsVersion = "23.0.1"
+
+        defaultConfig.with {
+            applicationId = "tsaarni.nativeeglexample"
+            minSdkVersion.apiLevel = 15
+            targetSdkVersion.apiLevel = 21
+
+        }
+    }
+
+    android.ndk {
+        moduleName = "nativeegl"
+        ldLibs += ["android", "EGL", "GLESv1_CM", "log"]
+        debuggable = true
+    }
+
+    android.buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles += file('proguard-rules.txt')
+        }
+    }
+
+    compileOptions.with {
+        sourceCompatibility = JavaVersion.VERSION_1_7
+        targetCompatibility = JavaVersion.VERSION_1_7
+    }
+}
